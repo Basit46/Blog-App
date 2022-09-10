@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.home {
+  background-image: url(./images/pexels-irina-iriser-1090972.jpg);
+  background-size: cover;
+}
+.active {
+  background-color: white;
+  padding: 4px;
+  color: black;
+}
+.articles {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(375px, 440px));
+  grid-gap: 2px;
+  grid-row-gap: 10px;
+  justify-content: center;
+}
+.article > * {
+  word-wrap: break-word;
+}
+.publish input,
+.publish textarea {
+  display: block;
+  border: 2px black solid;
+  padding: 3px;
+  margin-right: 30px;
+  margin-bottom: 10px;
+}
+.publish input {
+  width: 350px;
+}
+.publish textarea {
+  min-height: 280px;
+}
+label {
+  margin-right: 5px;
+}
