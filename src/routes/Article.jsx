@@ -24,7 +24,7 @@ const Article = ({ article }) => {
         <h1 className="font-semibold text-xl mb-1">{article.title}</h1>
         <button
           onClick={readArticle}
-          className="absolute bottom-8 bg-black text-white p-1 rounded-lg
+          className=" bg-black text-white p-1 rounded-lg
         "
         >
           Read Article

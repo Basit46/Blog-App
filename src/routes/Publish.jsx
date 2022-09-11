@@ -46,10 +46,10 @@ const Publish = () => {
   }
 
   return (
-    <div className="publish mt-3 p-3">
+    <div className="publish mt-3 p-1 sm:p-3">
       <h1 className="font-semibold text-2xl mb-4">
         Publish Your New Article Here{" "}
-        <p className="underline inline">{username}</p>
+        <p className="underline inline">{username}.</p>
       </h1>
       <div>
         <label htmlFor="title">Add Title:</label>
@@ -75,7 +75,7 @@ const Publish = () => {
             backgroundSize: "contain",
           }}
         >
-          <p className="text-2xl text-center font-bold text-gray-700">
+          <p className="text-2xl text-center font-bold text-gray-700 bg-cover">
             Image You Chose Will be Displayed Here
           </p>
         </div>
@@ -85,7 +85,7 @@ const Publish = () => {
 
         <button
           onClick={handleClick}
-          className="bg-green-700 text-white text-xl font-extrabold p-3 mt-2 mb-3 absolute right-10 active:bg-red-700"
+          className="bg-green-700 text-white text-xl font-extrabold p-3 mt-2 active:bg-red-700"
         >
           Publish
         </button>

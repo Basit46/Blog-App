@@ -1,5 +1,4 @@
 import { createContext, useEffect, useReducer, useState } from "react";
-import image from "../images/ag2.png";
 import image2 from "../images/liverpool.jpg";
 
 export const ACTION = {
@@ -44,14 +43,6 @@ export const OurProvider = ({ children }) => {
   const articlesToUse = returned
     ? JSON.parse(returned)
     : [
-        {
-          id: 1,
-          category: "Web3",
-          image: image,
-          title: "Top NFTs you should buy",
-          body: "Create Your Own Article, YOu can delete this article or the ones you created on profile page",
-          date: myDate,
-        },
         {
           id: 2,
           category: "Football",

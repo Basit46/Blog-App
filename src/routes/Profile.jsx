@@ -23,7 +23,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="px-9 pt-4">
+    <div className="px-2 sm:px-9 pt-4">
       <div className="sm:flex block items-center ">
         <div className="bg-gray-400 flex justify-center items-center w-52 h-52 rounded-full">
           <p className="font-extrabold text-9xl">{username.slice(0, 1)}</p>

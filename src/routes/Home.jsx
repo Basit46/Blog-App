@@ -9,11 +9,11 @@ const Home = () => {
   return (
     <div className="home h-5/6 text-white flex justify-center items-center">
       <div>
-        <div className="text-center text-5xl font-bold mb-2">
+        <div className="text text-3xl sm:text-5xl font-bold mb-2">
           {currentHour >= 12 ? "Good Afternoon" : "Good Morning"}, Welcome To
           Your Personal Blog
         </div>
-        <div className="text-center text-5xl font-bold mb-2">
+        <div className=" text-3xl sm:text-5xl font-bold mb-2">
           Head on to the{" "}
           <p
             className="text-blue-400 inline underline cursor-pointer"
@@ -21,7 +21,7 @@ const Home = () => {
           >
             Articles
           </p>{" "}
-          Page
+          Page.
         </div>
       </div>
     </div>
