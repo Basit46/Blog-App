@@ -12,7 +12,7 @@ const ArticleDetails = () => {
         .filter((art) => art.id === parseFloat(articleId))
         .map((article) => (
           <div className="sm:flex h-full" key={article.id}>
-            <div className="sm:h-full sm:w-1/3 sm:mr-3 mb-3">
+            <div className="sm:h-full h-1/5 sm:w-1/3 sm:mr-3 mb-3">
               <img
                 className="object-cover h-full"
                 src={article.image}
