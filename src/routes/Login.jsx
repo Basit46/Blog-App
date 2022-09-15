@@ -78,7 +78,6 @@ const Login = () => {
   onAuthStateChanged(auth, (user) => {
     const uidValue = user ? user.uid : user;
     setUserId(uidValue);
-    console.log(uidValue);
   });
 
   return (

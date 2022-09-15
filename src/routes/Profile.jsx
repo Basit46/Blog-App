@@ -47,7 +47,9 @@ const Profile = () => {
           </button>
         </div>
       </div>
-      <h1 className="font-bold text-2xl mb-3 mt-5">List of Articles</h1>
+      <h1 className="font-bold text-2xl mb-3 mt-5">
+        List of Articles You Published
+      </h1>
       <div>
         {articles
           .filter((article) => article.userId === userId)

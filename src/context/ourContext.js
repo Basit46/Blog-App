@@ -18,7 +18,6 @@ export const OurProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   useEffect(() => {
     onSnapshot(colRef, (snapshot) => {
-      console.log(snapshot.docs);
       setArticles(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
   }, []);
