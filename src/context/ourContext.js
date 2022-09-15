@@ -1,60 +1,37 @@
-import { createContext, useEffect, useReducer, useState } from "react";
-import image2 from "../images/liverpool.jpg";
+import { createContext, useEffect, useState } from "react";
+// import image2 from "../images/liverpool.jpg";
+import { db } from "../firebase";
+import { onSnapshot, collection } from "firebase/firestore";
 
-export const ACTION = {
-  ADD_ARTICLE: "add_article",
-  DEL_ARTICLE: "del_article",
-};
+// id: Date.now(),
+//           category: action.payload.categRef.current.value,
+//           image: action.payload.img,
+//           title: action.payload.titleRef.current.value,
+//           body: action.payload.bodyRef.current.value,
+//           date: new Date().toUTCString(),
 
 export const ourContext = createContext();
 
-const reducer = (articles, action) => {
-  switch (action.type) {
-    case ACTION.ADD_ARTICLE:
-      return [
-        ...articles,
-        {
-          id: Date.now(),
-          category: action.payload.categRef.current.value,
-          image: action.payload.img,
-          title: action.payload.titleRef.current.value,
-          body: action.payload.bodyRef.current.value,
-          date: new Date().toUTCString(),
-        },
-      ];
-    case ACTION.DEL_ARTICLE:
-      return articles.filter(
-        (article) => article.id !== action.payload.article.id
-      );
-    default:
-      return articles;
-  }
-};
-const myDate = new Date().toUTCString();
+const colRef = collection(db, "articles");
 
 export const OurProvider = ({ children }) => {
-  const [username, setusername] = useState("");
-
-  const returned = localStorage.getItem("articles");
-  const articlesToUse = returned
-    ? JSON.parse(returned)
-    : [
-        {
-          id: 2,
-          category: "Football",
-          image: image2,
-          title: "Liverpool boys running riot",
-          body: "Create Your Own Article, YOu can delete this article or the ones you created on profile page",
-          date: myDate,
-        },
-      ];
-  const [articles, dispatch] = useReducer(reducer, articlesToUse);
-
+  const nameToUse = localStorage.getItem("username") || "";
+  const [username, setusername] = useState(nameToUse);
   useEffect(() => {
-    localStorage.setItem("articles", JSON.stringify(articles));
-  }, [articles]);
+    localStorage.setItem("username", username);
+  }, [username]);
+
+  const [articles, setArticles] = useState([]);
+  useEffect(() => {
+    onSnapshot(colRef, (snapshot) => {
+      setArticles(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+  }, []);
+
+  console.log(articles);
+
   return (
-    <ourContext.Provider value={{ username, setusername, articles, dispatch }}>
+    <ourContext.Provider value={{ username, setusername, articles }}>
       {children}
     </ourContext.Provider>
   );

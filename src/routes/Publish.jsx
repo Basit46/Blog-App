@@ -1,12 +1,13 @@
-import React, { useRef, useContext, useState } from "react";
+import React, { useRef, useContext } from "react";
 import { useEffect } from "react";
 import { ourContext } from "../context/ourContext";
-import { ACTION } from "../context/ourContext";
 import { useNavigate } from "react-router";
+import { db } from "../firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 const Publish = () => {
-  const { dispatch, username } = useContext(ourContext);
-  const [img, setimg] = useState(null);
+  const { username } = useContext(ourContext);
+  // const [img, setimg] = useState(null);
   const navigate = useNavigate();
 
   const titleRef = useRef();
@@ -19,31 +20,34 @@ const Publish = () => {
     inputs.current.addEventListener("change", () => {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-        setimg(reader.result);
+        // setimg(reader.result);
         outputs.current.style.backgroundImage = `url(${reader.result})`;
       });
       reader.readAsDataURL(inputs.current.files[0]);
     });
   }, [inputs]);
 
-  async function handleClick() {
+  const handlePublish = (e) => {
+    e.preventDefault();
     if (
       titleRef.current.value === "" ||
       categRef.current.value === "" ||
       bodyRef.current.value === ""
     ) {
-      alert("Enter Appopriate Values");
+      alert("Enter all values");
     } else {
-      await dispatch({
-        type: ACTION.ADD_ARTICLE,
-        payload: { titleRef, categRef, bodyRef, img },
+      const colRef = collection(db, "articles");
+      addDoc(colRef, {
+        category: categRef.current.value,
+        image: "image",
+        title: titleRef.current.value,
+        body: bodyRef.current.value,
+        date: new Date().toUTCString(),
+      }).then(() => {
+        navigate("/articles");
       });
-      navigate("/articles");
-      titleRef.current.value = "";
-      categRef.current.value = "";
-      bodyRef.current.value = "";
     }
-  }
+  };
 
   return (
     <div className="publish mt-3 p-1 sm:p-3">
@@ -63,7 +67,6 @@ const Publish = () => {
         <label htmlFor="category">Add Category:</label>
         <input type="text" ref={categRef} id="category" placeholder="Tech" />
 
-        {/* <label htmlFor="image">Add Image</label> */}
         <input className="mt-4" ref={inputs} type="file" accept="image/*" />
         <div
           className="flex justify-center items-center"
@@ -84,7 +87,7 @@ const Publish = () => {
         <textarea ref={bodyRef} className="w-full "></textarea>
 
         <button
-          onClick={handleClick}
+          onClick={handlePublish}
           className="bg-green-700 text-white text-xl font-extrabold p-3 mt-2 active:bg-red-700"
         >
           Publish

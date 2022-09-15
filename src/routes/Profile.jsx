@@ -2,30 +2,28 @@ import React from "react";
 import { useContext } from "react";
 import { ourContext } from "../context/ourContext";
 import { useNavigate } from "react-router";
-import { ACTION } from "../context/ourContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import { db } from "../firebase";
+import { deleteDoc, doc } from "firebase/firestore";
 
 const Profile = () => {
-  const { articles, dispatch, username, setusername } = useContext(ourContext);
+  const { articles, username, setusername } = useContext(ourContext);
   const navigate = useNavigate();
 
-  var num = 0;
-  function getNum() {
-    articles.map((art) => {
-      num += 1;
-      return num;
-    });
-  }
-  getNum();
+  const numbers = articles.length;
 
-  function logOut() {
-    setusername("");
-    navigate("/");
+  const deleteArticle = (id) => {
+    const docRef = doc(db, "articles", id);
+    deleteDoc(docRef);
+  };
+
+  const loggingOut = () => {
     signOut(auth).then(() => {
-      alert("Signed Out Successfully");
+      navigate("/login");
+      setusername("");
     });
-  }
+  };
 
   return (
     <div className="px-2 sm:px-9 pt-4">
@@ -36,9 +34,11 @@ const Profile = () => {
         <div className="sm:ml-24">
           <h1 className="mb-2 text-4xl font-bold">{username}</h1>
           <p className="text-2xl font-semibold">Writer</p>
-          <p className="text-red-600 text-xl mt-3">{num} Articles Published</p>
+          <p className="text-red-600 text-xl mt-3">
+            {numbers} Articles Published
+          </p>
           <button
-            onClick={logOut}
+            onClick={loggingOut}
             className="bg-red-700 text-white p-1 font-semibold text-xl mt-2"
           >
             Logout
@@ -54,9 +54,7 @@ const Profile = () => {
           >
             <h1>{article.title}</h1>
             <button
-              onClick={() =>
-                dispatch({ type: ACTION.DEL_ARTICLE, payload: { article } })
-              }
+              onClick={() => deleteArticle(article.id)}
               className="bg-red-700 text-white"
             >
               DELETE ARTICLE
