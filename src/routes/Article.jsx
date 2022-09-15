@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
-import { ourContext } from "../context/ourContext";
+import React from "react";
 import { useNavigate } from "react-router";
 import image2 from "../images/liverpool.jpg";
 
 const Article = ({ article }) => {
-  const { username } = useContext(ourContext);
+  // const { username } = useContext(ourContext);
   const navigate = useNavigate();
   function readArticle() {
     navigate(`/articles/${article.id}`);
@@ -16,7 +15,7 @@ const Article = ({ article }) => {
         <img className="object-cover h-full" src={image2} alt="article img" />
       </div>
       <div className="w-3/5 ml-1">
-        <p className="mb-2">{username}</p>
+        <p className="mb-2">{article.author}</p>
         <p className="text-red-700 font-semibold">{article.category}</p>
         <h1 className="font-semibold text-xl mb-1">{article.title}</h1>
         <button

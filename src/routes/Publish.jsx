@@ -39,6 +39,7 @@ const Publish = () => {
       const colRef = collection(db, "articles");
       addDoc(colRef, {
         category: categRef.current.value,
+        author: username,
         image: "image",
         title: titleRef.current.value,
         body: bodyRef.current.value,
