@@ -31,13 +31,9 @@ const reducer = (articles, action) => {
   }
 };
 const myDate = new Date().toUTCString();
+
 export const OurProvider = ({ children }) => {
-  const gottenName = localStorage.getItem("username");
-  const nameToUse = gottenName ? gottenName : "";
-  const [username, setusername] = useState(nameToUse);
-  useEffect(() => {
-    localStorage.setItem("username", username);
-  }, [username]);
+  const [username, setusername] = useState("");
 
   const returned = localStorage.getItem("articles");
   const articlesToUse = returned

@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { ourContext } from "../context/ourContext";
 import { useNavigate } from "react-router";
 import { ACTION } from "../context/ourContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
 const Profile = () => {
   const { articles, dispatch, username, setusername } = useContext(ourContext);
@@ -20,6 +22,9 @@ const Profile = () => {
   function logOut() {
     setusername("");
     navigate("/");
+    signOut(auth).then(() => {
+      alert("Signed Out Successfully");
+    });
   }
 
   return (
