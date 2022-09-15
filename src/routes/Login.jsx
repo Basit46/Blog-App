@@ -5,6 +5,7 @@ import { auth } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 const Login = () => {
@@ -17,7 +18,7 @@ const Login = () => {
   const emailLogInRef = useRef();
   const passwordLogInRef = useRef();
 
-  const { setusername } = useContext(ourContext);
+  const { setusername, setUserId } = useContext(ourContext);
 
   const navigate = useNavigate();
 
@@ -60,7 +61,6 @@ const Login = () => {
       signInWithEmailAndPassword(auth, email, password)
         .then((cred) => {
           console.log(cred.user);
-          console.log(inputedName);
           setusername(inputedName);
           setLoginError(false);
           navigate("/articles");
@@ -74,6 +74,12 @@ const Login = () => {
       alert("Enter appropriate login values");
     }
   };
+
+  onAuthStateChanged(auth, (user) => {
+    const uidValue = user ? user.uid : user;
+    setUserId(uidValue);
+    console.log(uidValue);
+  });
 
   return (
     <div className="flex justify-center pt-14">

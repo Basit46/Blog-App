@@ -8,10 +8,12 @@ import { db } from "../firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 
 const Profile = () => {
-  const { articles, username, setusername } = useContext(ourContext);
+  const { articles, username, setusername, userId } = useContext(ourContext);
   const navigate = useNavigate();
 
-  const numbers = articles.length;
+  const numbers = articles.filter(
+    (article) => article.userId === userId
+  ).length;
 
   const deleteArticle = (id) => {
     const docRef = doc(db, "articles", id);
@@ -47,20 +49,22 @@ const Profile = () => {
       </div>
       <h1 className="font-bold text-2xl mb-3 mt-5">List of Articles</h1>
       <div>
-        {articles.map((article) => (
-          <div
-            key={article.id}
-            className="flex justify-between items-center mb-3 p-1 border-b-gray-600 border-b-2"
-          >
-            <h1>{article.title}</h1>
-            <button
-              onClick={() => deleteArticle(article.id)}
-              className="bg-red-700 text-white"
+        {articles
+          .filter((article) => article.userId === userId)
+          .map((article) => (
+            <div
+              key={article.id}
+              className="flex justify-between items-center mb-3 p-1 border-b-gray-600 border-b-2"
             >
-              DELETE ARTICLE
-            </button>
-          </div>
-        ))}
+              <h1>{article.title}</h1>
+              <button
+                onClick={() => deleteArticle(article.id)}
+                className="bg-red-700 text-white"
+              >
+                DELETE ARTICLE
+              </button>
+            </div>
+          ))}
       </div>
     </div>
   );

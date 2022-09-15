@@ -6,7 +6,7 @@ import { db } from "../firebase";
 import { addDoc, collection } from "firebase/firestore";
 
 const Publish = () => {
-  const { username } = useContext(ourContext);
+  const { username, userId } = useContext(ourContext);
   // const [img, setimg] = useState(null);
   const navigate = useNavigate();
 
@@ -40,6 +40,7 @@ const Publish = () => {
       addDoc(colRef, {
         category: categRef.current.value,
         author: username,
+        userId,
         image: "image",
         title: titleRef.current.value,
         body: bodyRef.current.value,

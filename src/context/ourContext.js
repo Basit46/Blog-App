@@ -3,13 +3,6 @@ import { createContext, useEffect, useState } from "react";
 import { db } from "../firebase";
 import { onSnapshot, collection } from "firebase/firestore";
 
-// id: Date.now(),
-//           category: action.payload.categRef.current.value,
-//           image: action.payload.img,
-//           title: action.payload.titleRef.current.value,
-//           body: action.payload.bodyRef.current.value,
-//           date: new Date().toUTCString(),
-
 export const ourContext = createContext();
 
 const colRef = collection(db, "articles");
@@ -22,16 +15,18 @@ export const OurProvider = ({ children }) => {
   }, [username]);
 
   const [articles, setArticles] = useState([]);
+  const [userId, setUserId] = useState(null);
   useEffect(() => {
     onSnapshot(colRef, (snapshot) => {
+      console.log(snapshot.docs);
       setArticles(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
   }, []);
 
-  console.log(articles);
-
   return (
-    <ourContext.Provider value={{ username, setusername, articles }}>
+    <ourContext.Provider
+      value={{ username, setusername, articles, userId, setUserId }}
+    >
       {children}
     </ourContext.Provider>
   );
