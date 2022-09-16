@@ -7,7 +7,7 @@ const Home = () => {
   let currentHour = ourDate.getHours();
 
   return (
-    <div className="home h-5/6 text-white flex justify-center items-center">
+    <div className="home h-88% text-white flex justify-center items-center">
       <div>
         <div className="text text-3xl sm:text-5xl font-bold mb-2">
           {currentHour >= 12 ? "Good Afternoon" : "Good Morning"}, Welcome To

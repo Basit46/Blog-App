@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-// import image2 from "../images/liverpool.jpg";
 import { db } from "../firebase";
 import { onSnapshot, collection } from "firebase/firestore";
 
@@ -15,12 +14,18 @@ export const OurProvider = ({ children }) => {
   }, [username]);
 
   const [articles, setArticles] = useState([]);
-  const [userId, setUserId] = useState(null);
+
   useEffect(() => {
     onSnapshot(colRef, (snapshot) => {
       setArticles(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
   }, []);
+
+  const returnedId = localStorage.getItem("userId") || "";
+  const [userId, setUserId] = useState(returnedId);
+  useEffect(() => {
+    localStorage.setItem("userId", userId);
+  }, [userId]);
 
   return (
     <ourContext.Provider

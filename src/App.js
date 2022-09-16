@@ -11,7 +11,7 @@ import RequireAuth from "./auth/RequireAuth";
 
 const App = () => {
   return (
-    <div className="h-screen">
+    <div className="h-screen relative overflow-x-hidden">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
