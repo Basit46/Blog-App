@@ -7,6 +7,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { username } = useContext(ourContext);
   const [show, setShow] = useState(true);
+
   const showMenu = () => {
     setShow(!show);
   };
@@ -22,7 +23,7 @@ const Navbar = () => {
       </h1>
       <div
         className={`links ${
-          show ? "showlinks" : ""
+          show && "showlinks"
         } flex items-center sm:space-x-4 space-x-2 text-xl sm:text-2xl`}
       >
         <NavLink onClick={showMenu} to="/articles">
