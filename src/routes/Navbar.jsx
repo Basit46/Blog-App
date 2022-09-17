@@ -6,7 +6,7 @@ import { ourContext } from "../context/ourContext";
 const Navbar = () => {
   const navigate = useNavigate();
   const { username } = useContext(ourContext);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   const showMenu = () => {
     setShow(!show);
