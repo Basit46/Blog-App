@@ -12,7 +12,7 @@ const Navbar = () => {
     setShow(!show);
   };
   return (
-    <nav className="h-12% flex justify-around items-center py-2 bg-black text-white cursor-pointer">
+    <nav className="h-[12%] flex justify-around items-center py-2 bg-[tomato] text-white cursor-pointer">
       <h1
         onClick={() => {
           navigate("/");

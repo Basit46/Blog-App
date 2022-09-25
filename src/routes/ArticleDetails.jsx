@@ -23,10 +23,14 @@ const ArticleDetails = () => {
   return (
     <div className="sm:px-5 px-3 py-2 h-88%">
       <div className="sm:flex h-full" key={article.id}>
-        <div className="sm:h-full h-1/5 sm:w-1/3 sm:mr-3 mb-3">
-          <img className="object-cover h-full" src={image2} alt="A Section" />
+        <div className="sm:h-full h-[40%] sm:w-1/3 sm:mr-3 mb-3">
+          <img
+            className="object-cover object-top h-full w-full sm:w-auto"
+            src={image2}
+            alt="A Section"
+          />
         </div>
-        <div className="sm:w-2/3 sm:h-full overflow-scroll overflow-x-hidden">
+        <div className="sm:w-2/3 sm:h-full sm:overflow-scroll sm:overflow-x-hidden">
           <p className="text-xl mb-2 underline">{username}</p>
           <h1 className="font-bold text-3xl sm:text-6xl mb-3">
             {article.title}
