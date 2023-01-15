@@ -1,5 +1,5 @@
 import React, { useRef, useContext } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { ourContext } from "../context/ourContext";
 import { useNavigate } from "react-router";
 import { db } from "../firebase";
@@ -13,19 +13,19 @@ const Publish = () => {
   const titleRef = useRef();
   const categRef = useRef();
   const bodyRef = useRef();
-  const inputs = useRef();
-  const outputs = useRef();
+  // const inputs = useRef();
+  // const outputs = useRef();
 
-  useEffect(() => {
-    inputs.current.addEventListener("change", () => {
-      const reader = new FileReader();
-      reader.addEventListener("load", () => {
-        // setimg(reader.result);
-        outputs.current.style.backgroundImage = `url(${reader.result})`;
-      });
-      reader.readAsDataURL(inputs.current.files[0]);
-    });
-  }, [inputs]);
+  // useEffect(() => {
+  //   inputs.current.addEventListener("change", () => {
+  //     const reader = new FileReader();
+  //     reader.addEventListener("load", () => {
+  //       // setimg(reader.result);
+  //       outputs.current.style.backgroundImage = `url(${reader.result})`;
+  //     });
+  //     reader.readAsDataURL(inputs.current.files[0]);
+  //   });
+  // }, [inputs]);
 
   const handlePublish = (e) => {
     e.preventDefault();
@@ -69,8 +69,8 @@ const Publish = () => {
         <label htmlFor="category">Add Category:</label>
         <input type="text" ref={categRef} id="category" placeholder="Tech" />
 
-        <input className="mt-4" ref={inputs} type="file" accept="image/*" />
-        <div
+        {/* <input className="mt-4" ref={inputs} type="file" accept="image/*" /> */}
+        {/* <div
           className="flex justify-center items-center"
           ref={outputs}
           style={{
@@ -83,7 +83,7 @@ const Publish = () => {
           <p className="text-2xl text-center font-bold text-gray-700 bg-cover">
             Image You Chose Will be Displayed Here
           </p>
-        </div>
+        </div> */}
 
         <label htmlFor="text">Write your article:</label>
         <textarea ref={bodyRef} className="w-full "></textarea>
