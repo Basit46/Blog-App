@@ -15,14 +15,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="articles"
-          element={
-            <RequireAuth>
-              <Articles />
-            </RequireAuth>
-          }
-        />
+        <Route path="articles" element={<Articles />} />
         <Route path="articles/:articleId" element={<ArticleDetails />} />
         <Route
           path="publish"
